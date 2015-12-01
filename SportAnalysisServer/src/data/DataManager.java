@@ -17,53 +17,53 @@ import data.timecomp.TimeCompAnalysis;
 
 
 /**
- * �f�[�^�I�u�W�F�N�g�Ǘ��N���X
+ * データオブジェクト管理クラス
  * @author OZAKI
  *
  */
 public class DataManager {
 
 	/**
-	 * �f�[�^�𕪐͂��ăp�����[�^�𐶐�����N���X
+	 * データを分析してパラメータを生成するクラス
 	 */
 	public static TimeCompAnalysis time_comp = new TimeCompAnalysis();
 
 
 	/**
-	 * �X�}�z�l�f�[�^�̃n�b�V���}�b�v
+	 * スマホ個人データのハッシュマップ
 	 */
 	public static HashMap<String,SmartPhonePersonalData> personal_map = new HashMap<String,SmartPhonePersonalData>();
 
 	/**
-	 * �Z���T�l�f�[�^�̃n�b�V���}�b�v
+	 * センサ個人データのハッシュマップ
 	 */
 	public static HashMap<String,SensorPersonalData> sensor_personal_map = new HashMap<String,SensorPersonalData>();
 
 	/**
-	 * �����Z���T�l�f�[�^�̃n�b�V���}�b�v
+	 * 複数センサ個人データのハッシュマップ
 	 */
 	public static HashMap<String,MultiSensorPersonalData> multi_sensor_personal_map = new HashMap<String,MultiSensorPersonalData>();
 
 
 	/**
-	 * �X�}�z�^���f�[�^���w�肳�ꂽ���[�U���̌l�f�[�^�ɐݒ肵�A���ݐݒ肵���^���f�[�^�I�u�W�F�N�g��ԋp
-	 * @param user_name �l�f�[�^�̃��[�U��
-	 * @param data �^���f�[�^
+	 * スマホ運動データを指定されたユーザ名の個人データに設定し、現在設定した運動データオブジェクトを返却
+	 * @param user_name 個人データのユーザ名
+	 * @param data 運動データ
 	 * @return
 	 * @throws IOException
 	 */
 	public static SmartPhoneActionData create_smart_phone_data(String user_name,String mode,String data) throws IOException{
 		Debug.debug_print("DataManager.create_smart_phone_data(String user_name,String mode,String data)",1);
-		//��M�����f�[�^�̓���f�[�^�I�u�W�F�N�g�𐶐�
+		//受信したデータの動作データオブジェクトを生成
 		SmartPhoneActionData received_data = new SmartPhoneActionData(SettingValues.ACC_DATA_NUM);
 		received_data.setData(data);
 
-		//���[�U�����o�^�ς��ǂ����`�F�b�N
+		//ユーザ名が登録済かどうかチェック
 		if(personal_map.containsKey(user_name)){
-			//�o�^�ς̏ꍇ�o�^���ꂽ���[�U�̃f�[�^�ɉ^���f�[�^��ݒ�
+			//登録済の場合登録されたユーザのデータに運動データを設定
 			personal_map.get(user_name).setdata(received_data);
 		}else{
-			//�o�^����Ă��Ȃ��ꍇ���[�U�̃f�[�^��V�K�쐬���ĉ^���f�[�^��ݒ�
+			//登録されていない場合ユーザのデータを新規作成して運動データを設定
 			personal_map.put(user_name, new SmartPhonePersonalData(user_name,mode,new SmartPhoneActionData(SettingValues.STORE_DATA_NUM)));
 			personal_map.get(user_name).setdata(received_data);
 		}
@@ -71,21 +71,21 @@ public class DataManager {
 	}
 
 	/**
-	 * �Z���T�^���f�[�^���w�肳�ꂽ���[�U���̌l�f�[�^�ɐݒ肵�A���ݐݒ肵���^���f�[�^�I�u�W�F�N�g��ԋp
-	 * @param user_name �l�f�[�^�̃��[�U��
-	 * @param data �^���f�[�^
+	 * センサ運動データを指定されたユーザ名の個人データに設定し、現在設定した運動データオブジェクトを返却
+	 * @param user_name 個人データのユーザ名
+	 * @param data 運動データ
 	 * @return
 	 * @throws IOException
 	 */
 	public static SensorActionData create_sensor_data(String user_name,String mode,String data) throws IOException{
 		Debug.debug_print("DataManager.create_sensor_data(String user_name,String mode,String data)",1);
-		//��M�����f�[�^�̓���f�[�^�I�u�W�F�N�g�𐶐�
+		//受信したデータの動作データオブジェクトを生成
 		SensorActionData received_data = new SensorActionData(SettingValues.ACC_DATA_NUM_S);
 		received_data.setData(data);
 
-		//���[�U�����o�^�ς��ǂ����`�F�b�N
+		//ユーザ名が登録済かどうかチェック
 		if(!sensor_personal_map.containsKey(user_name)){
-			//�o�^����Ă��Ȃ��ꍇ���[�U�̃f�[�^��V�K�쐬���ĉ^���f�[�^��ݒ�
+			//登録されていない場合ユーザのデータを新規作成して運動データを設定
 			sensor_personal_map.put(user_name, new SensorPersonalData(user_name,mode));
 			sensor_personal_map.get(user_name).first_act_data.setFirstData(received_data);
 		}
@@ -93,7 +93,7 @@ public class DataManager {
 	}
 
 	/**
-	 * �����Z���T�̃f�[�^��ID���画�ʂ��Ċe�I�u�W�F�N�g�Ƀf�[�^��ݒ�
+	 * 複数センサのデータをIDから判別して各オブジェクトにデータを設定
 	 *
 	 * @param user_name
 	 * @param data
@@ -111,7 +111,7 @@ public class DataManager {
 	}
 
 	/**
-	 * �����Z���T���̃��[�U�f�[�^���쐬���A���ԍ����f�[�^��ݒ�
+	 * 複数センサ時のユーザデータを作成し、時間差分データを設定
 	 * @param name
 	 * @param data
 	 */
@@ -129,17 +129,17 @@ public class DataManager {
 		int sensor_num = byte_data.length / 2 / LONG_NUM;
 
 		if(!multi_sensor_personal_map.containsKey(user_name)){
-			//�o�^����Ă��Ȃ��ꍇ���[�U�̃f�[�^��V�K�쐬���ĉ^���f�[�^��ݒ�
+			//登録されていない場合ユーザのデータを新規作成して運動データを設定
 			multi_sensor_personal_map.put(user_name, new MultiSensorPersonalData(user_name,ModeValues.MULTI_SENSOR_COACH_MODE,sensor_num));
 		}
 		multi_sensor_personal_map.get(user_name).set_sensor_diff_times(byte_data);
 	}
 
 	/**
-	 * �_�~�[�����p
-	 * �Z���T�^���f�[�^���w�肳�ꂽ���[�U���̌l�f�[�^�ɐݒ肵�A���ݐݒ肵���^���f�[�^�I�u�W�F�N�g��ԋp
-	 * @param user_name �l�f�[�^�̃��[�U��
-	 * @param data �^���f�[�^
+	 * ダミー処理用
+	 * センサ運動データを指定されたユーザ名の個人データに設定し、現在設定した運動データオブジェクトを返却
+	 * @param user_name 個人データのユーザ名
+	 * @param data 運動データ
 	 * @return
 	 * @throws IOException
 	 */
@@ -147,16 +147,14 @@ public class DataManager {
 		Debug.debug_print("DataManager.create_sensor_data(String user_name,String mode,String data)",1);
 
 
-		//���[�U�����o�^�ς��ǂ����`�F�b�N
+		//ユーザ名が登録済かどうかチェック
 		if(!sensor_personal_map.containsKey(user_name)){
-			//�o�^����Ă��Ȃ��ꍇ���[�U�̃f�[�^��V�K�쐬���ĉ^���f�[�^��ݒ�
+			//登録されていない場合ユーザのデータを新規作成して運動データを設定
 			sensor_personal_map.put(user_name, new SensorPersonalData(user_name,mode));
 			sensor_personal_map.get(user_name).first_act_data.setFirstData(received_data);
 		}
 		return received_data;
 	}
 
-	public static long get_last_time(String user_name){
-		return sensor_personal_map.get(user_name).act_para.getLast_time();
-	}
+
 }

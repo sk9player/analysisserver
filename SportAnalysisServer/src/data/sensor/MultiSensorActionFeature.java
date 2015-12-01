@@ -1,49 +1,49 @@
 package data.sensor;
 
 /**
- * ‰^“®ƒpƒ‰ƒ[ƒ^‚ÌƒNƒ‰ƒX ‰^“®ƒf[ƒ^‚©‚ç•ªÍ‚µ‚½ƒpƒ‰ƒ[ƒ^‚ğŠi”[‚·‚é‹@”\‚ğ—L‚·‚é
- * 
+ * é‹å‹•ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®ã‚¯ãƒ©ã‚¹ é‹å‹•ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰åˆ†æã—ãŸãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’æ ¼ç´ã™ã‚‹æ©Ÿèƒ½ã‚’æœ‰ã™ã‚‹
+ *
  * @author OZAKI
- * 
+ *
  */
 public class MultiSensorActionFeature {
 
-	
+
 	/**
-	 * •½‹Ï’l
+	 * å¹³å‡å€¤
 	 */
 	private double average_feature;
 	/**
-	 * Å‘å’l
+	 * æœ€å¤§å€¤
 	 */
 	private double max_feature;
 	/**
-	 * Å¬’l
+	 * æœ€å°å€¤
 	 */
 	private double min_feature;
 	/**
-	 * ’lˆæiÅ‘å-Å¬j
+	 * å€¤åŸŸï¼ˆæœ€å¤§-æœ€å°ï¼‰
 	 */
 	private double range_feature;
 	/**
-	 * ”g’·i1üŠú‚ÌŠÔj
+	 * æ³¢é•·ï¼ˆ1å‘¨æœŸã®æ™‚é–“ï¼‰
 	 */
 	private double freq_feature;
 	/**
-	 * ˆÊ‘Š
+	 * ä½ç›¸
 	 */
 	private double phase_feature;
-	
-	
+
+
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 */
 	public MultiSensorActionFeature() {
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’l‚ğİ’èj
-	 * 
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆå€¤ã‚’è¨­å®šï¼‰
+	 *
 	 * @param features
 	 */
 	public MultiSensorActionFeature(MultiSensorActionFeature features) {
@@ -122,5 +122,5 @@ public class MultiSensorActionFeature {
 	public void setPhase_feature(double phase_feature) {
 		this.phase_feature = phase_feature;
 	}
-	
+
 }

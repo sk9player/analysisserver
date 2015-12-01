@@ -53,6 +53,7 @@ public class SensorAnalysisService extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Debug.debug_print("SensorAnalysisService.doGet", 99999999);
+
 		// ユーザ名を取得
 		String name = request.getParameter("name");
 		// コーチモードを取得

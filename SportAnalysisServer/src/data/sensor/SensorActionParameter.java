@@ -3,7 +3,7 @@ package data.sensor;
 import setting.ModeValues;
 
 /**
- * �^���p�����[�^�̃N���X �^���f�[�^���番�͂����p�����[�^���i�[����@�\��L����
+ * 運動パラメータのクラス 運動データから分析したパラメータを格納する機能を有する
  *
  * @author OZAKI
  *
@@ -12,71 +12,71 @@ public class SensorActionParameter {
 
 
 	/**
-	 * �������(�����͕��͎��s���)
+	 * 滑走状態(初期は分析失敗状態)
 	 */
 	private int state=ModeValues.FAIL_STATE;
 
 	/**
-	 * �p�����[�^���擾��������
+	 * パラメータを取得した時間
 	 */
 	private long last_time;
 
 	/**
-	 * z���I�C���[�p�i�㔼�g�̌����j�̍ő�l����ŏ��l�̍����̕���
+	 * z軸オイラー角（上半身の向き）の最大値から最小値の差分の平均
 	 */
 	private double eurz_diff_ave;
 	/**
-	 * x���I�C���[�p�i�㔼�g�̌X�΁j�̕���
+	 * x軸オイラー角（上半身の傾斜）の平均
 	 */
 	private double eurx_ave;
 	/**
-	 * y���I�C���[�p�i�㔼�g�̍��E�X�΁j�̕���
+	 * y軸オイラー角（上半身の左右傾斜）の平均
 	 */
 	private double eury_ave;
 
 	/**
-	 * ���݈ܓx
+	 * 現在緯度
 	 */
 	private float now_latitude;
 	/**
-	 * ���݌o�x
+	 * 現在経度
 	 */
 	private float now_longitude;
 
 	/**
-	 * z�������^���ʁi���玿�ʂ��������l�j ��r�p�ɗp����̂Ŏ��ʂ͖�������
+	 * z軸方向運動量（から質量を除いた値） 比較用に用いるので質量は無視する
 	 */
 	private double move_z;
 	/**
-	 * ���������^���ʁi���玿�ʂ��������l�j ��r�p�ɗp����̂Ŏ��ʂ͖�������
+	 * 水平方向運動量（から質量を除いた値） 比較用に用いるので質量は無視する
 	 */
 	private double move_xy;
 	/**
-	 * ���E�����^���ʁi���玿�ʂ��������l�j ��r�p�ɗp����̂Ŏ��ʂ͖������� �Z���T���W�n�����x����Z�o
+	 * 左右方向運動量（から質量を除いた値） 比較用に用いるので質量は無視する センサ座標系加速度から算出
 	 */
 	private double move_x;
 	/**
-	 * �s���̂P�����̒���
+	 * 行動の１周期の長さ
 	 */
 	private double cycle;
 	/**
-	 * ���ϑ��x(m/s)/�s���̂P�����̒���=�X�g���C�h�H
+	 * 平均速度(m/s)/行動の１周期の長さ=ストライド？
 	 */
 	private double stride;
 
 	/**
-	 * ���ϑ��x(km/h)
+	 * 平均速度(km/h)
 	 */
 	private double ave_speed;
 
 	/**
-	 * �R���X�g���N�^
+	 * コンストラクタ
 	 */
 	public SensorActionParameter() {
 	}
 
 	/**
-	 * �R���X�g���N�^�i�l��ݒ�j
+	 * コンストラクタ（値を設定）
 	 *
 	 * @param action_para
 	 */
@@ -94,9 +94,10 @@ public class SensorActionParameter {
 	}
 
 	/**
-	 * �l��0�Ƀ��Z�b�g
+	 * 値を0にリセット
 	 */
 	public void resetParamater(){
+		last_time = 0;
 		cycle = 0;
 		eurz_diff_ave = 0;
 		eurx_ave = 0;

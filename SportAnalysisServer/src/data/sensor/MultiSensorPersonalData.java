@@ -1,90 +1,86 @@
 package data.sensor;
 
-import data.ActionData;
-import data.PersonalData;
-
-import setting.ModeValues;
 import setting.SettingValues;
 import sub.Debug;
-import sub.OutPutText;
+import data.PersonalData;
 
 /**
- * •¡”ƒZƒ“ƒT•ªÍƒ‚[ƒh‚Ìƒ†[ƒUƒf[ƒ^
- * 
- * ‚¢‚¸‚êASensorPersonalData‚àƒZƒ“ƒT‚P‚Â‚ÌMultiSensorPersonalData‚Æ‚µ‚Ä‹@”\“‡‚·‚é—\’èiMultiSensorActionData‚É‚Â‚¢‚Ä‚à“¯—lj
- * 
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½Íƒï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½Uï¿½fï¿½[ï¿½^
+ *
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ASensorPersonalDataï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Tï¿½Pï¿½Â‚ï¿½MultiSensorPersonalDataï¿½Æ‚ï¿½ï¿½Ä‹@ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½iMultiSensorActionDataï¿½É‚Â‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½lï¿½j
+ *
  * @author OZAKI
  *
  */
 public class MultiSensorPersonalData extends PersonalData{
 
 	/**
-	 * ƒZƒ“ƒT‚Ì”
+	 * ï¿½Zï¿½ï¿½ï¿½Tï¿½Ìï¿½
 	 */
 	public int sensor_num=0;
-	
+
 	/**
-	 * ƒZƒ“ƒT–ˆ‚ÌƒZƒ“ƒT‰^“®ƒf[ƒ^iŠÔ³‹K‰»Œãj‚Ì”z—ñ
+	 * ï¿½Zï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ÌƒZï¿½ï¿½ï¿½Tï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iï¿½ï¿½ï¿½Ôï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½jï¿½Ì”zï¿½ï¿½
 	 */
 	public SensorActionData[][] multi_act_data_normalized_array;
-	
+
 	/**
-	 * ƒZƒ“ƒT–ˆ‚ÌƒZƒ“ƒTŠÔ‚Ì·iƒXƒ}[ƒgƒtƒHƒ“‚ÌŠÔ‚Æ‚Ì·‚ÅZoj
+	 * ï¿½Zï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ÌƒZï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½Ô‚Ìï¿½ï¿½iï¿½Xï¿½}ï¿½[ï¿½gï¿½tï¿½Hï¿½ï¿½ï¿½Ìï¿½ï¿½Ô‚Æ‚Ìï¿½ï¿½ÅZï¿½oï¿½j
 	 */
 	public long[] sensorDiffTimes;
-	
+
 	/**
-	 * ‰^“®ƒf[ƒ^iŠÔ³‹K‰»Œãjƒiƒ“ƒo[
+	 * ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iï¿½ï¿½ï¿½Ôï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½jï¿½iï¿½ï¿½ï¿½oï¿½[
 	 */
 	public int[] normalized_data_num;
-	
+
 	/**
-	 * ‰^“®ƒf[ƒ^iŠÔ³‹K‰»Œãj‚ÌÅV’ÊMƒiƒ“ƒo[
+	 * ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iï¿½ï¿½ï¿½Ôï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½jï¿½ÌÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[
 	 */
 	public int[] normalized_data_commu_num;
-	
-	
+
+
 	/**
-	 * ƒZƒ“ƒT‰^“®ƒpƒ‰ƒ[ƒ^
+	 * ï¿½Zï¿½ï¿½ï¿½Tï¿½^ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^
 	 */
 	public MultiSensorActionFeature features = new MultiSensorActionFeature();
-	
-	
+
+
 	/**
-	 * ƒZƒ“ƒT–ˆ‚Ì‰^“®ƒf[ƒ^iŠÔ³‹K‰»Œãj¶¬‰ñ”
+	 * ï¿½Zï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iï¿½ï¿½ï¿½Ôï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int[] count_index;
-	
+
 	/**
-	 * ‰^“®ƒf[ƒ^iŠÔ³‹K‰»Œãjo—ÍƒeƒLƒXƒgƒCƒ“ƒfƒbƒNƒX
+	 * ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iï¿½ï¿½ï¿½Ôï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½jï¿½oï¿½Íƒeï¿½Lï¿½Xï¿½gï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½X
 	 */
 	public int[] txt_index;
-	
+
 	/**
-	 * •ªÍ‰ñ”
+	 * ï¿½ï¿½ï¿½Í‰ï¿½
 	 */
 	public int analysis_count = 0;
-	
+
 	/**
-	 * ƒLƒƒƒŠƒuƒŒ[ƒVƒ‡ƒ“—p‰ŠúƒZƒ“ƒTƒf[ƒ^iƒXƒ^[ƒg’n“_‚Å’¼—§§~‚µ‚ÄŒv‘ªj
+	 * ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Tï¿½fï¿½[ï¿½^ï¿½iï¿½Xï¿½^ï¿½[ï¿½gï¿½nï¿½_ï¿½Å’ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½ÄŒvï¿½ï¿½ï¿½j
 	 */
 	public SensorActionData first_act_data = new SensorActionData(1);
 
-	
+
 	/**
-	 * ŒÂlƒf[ƒ^ƒIƒuƒWƒFƒNƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param user_name ƒ†[ƒU–¼
-	 * @param act_data ‰^“®ƒf[ƒ^
+	 * ï¿½Âlï¿½fï¿½[ï¿½^ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param user_name ï¿½ï¿½ï¿½[ï¿½Uï¿½ï¿½
+	 * @param act_data ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^
 	 */
 	public MultiSensorPersonalData(String name,String coach_mode,int sensor_num){
 		super(name,coach_mode);
 		init(sensor_num);
 	}
-	
+
 	/**
-	 * ŒÂlƒf[ƒ^ƒIƒuƒWƒFƒNƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param user_name ƒ†[ƒU–¼
-	 * @param act_data ‰^“®ƒf[ƒ^
+	 * ï¿½Âlï¿½fï¿½[ï¿½^ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param user_name ï¿½ï¿½ï¿½[ï¿½Uï¿½ï¿½
+	 * @param act_data ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^
 	 */
 	public MultiSensorPersonalData(String name,int coach_mode,int sensor_num){
 		super(name,Integer.toString(coach_mode));
@@ -100,9 +96,9 @@ public class MultiSensorPersonalData extends PersonalData{
 		normalized_data_commu_num = new int[sensor_num];
 		txt_index = new int[sensor_num];
 	}
-	
+
 	/**
-	 * •¡”ƒZƒ“ƒT‚ÌŠÔ·î•ñ‚ğZo‚µ‚Äİ’è
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Tï¿½Ìï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½oï¿½ï¿½ï¿½Äİ’ï¿½
 	 * @param byte_data
 	 */
 	public void set_sensor_diff_times(byte[] byte_data) {
@@ -116,75 +112,75 @@ public class MultiSensorPersonalData extends PersonalData{
 
 			System.arraycopy(byte_data, i*LONG_NUM*2, sensor_b, 0, LONG_NUM);
 			System.arraycopy(byte_data, i*LONG_NUM*2+LONG_NUM, android_b, 0, LONG_NUM);
-			
+
 			long android_time = CalcSensorData.byte_to_long(android_b);
 			Debug.debug_print("android_time:"+android_time,99);
 			long sensor_time = CalcSensorData.byte_to_long(sensor_b);
 			Debug.debug_print("sensor_time:"+sensor_time,99);
-			
+
 			sensorDiffTimes[i] = android_time-sensor_time;
 		}
 	}
 
-	
+
 	/**
-	 * ƒZƒ“ƒTƒf[ƒ^‚Ì”z—ñ‚ğ•Ô‹p
-	 *  ƒZƒ“ƒTƒf[ƒ^d—l
-	 *  0:‘¬“x
-	 *  1:z²ƒIƒCƒ‰[Špiã”¼g‚ÌŒü‚«j
-	 *  2:x²ƒIƒCƒ‰[Špiã”¼g‚ÌŒXÎj
-	 *  3:z²(ã‰º•ûŒü)‰Á‘¬“x
-	 * 
-	 * 
-	 * 
+	 * ï¿½Zï¿½ï¿½ï¿½Tï¿½fï¿½[ï¿½^ï¿½Ì”zï¿½ï¿½ï¿½Ô‹p
+	 *  ï¿½Zï¿½ï¿½ï¿½Tï¿½fï¿½[ï¿½^ï¿½dï¿½l
+	 *  0:ï¿½ï¿½ï¿½x
+	 *  1:zï¿½ï¿½ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½iï¿½ã”¼ï¿½gï¿½ÌŒï¿½ï¿½ï¿½ï¿½j
+	 *  2:xï¿½ï¿½ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½iï¿½ã”¼ï¿½gï¿½ÌŒXï¿½Îj
+	 *  3:zï¿½ï¿½(ï¿½ã‰ºï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½x
+	 *
+	 *
+	 *
 	 * @return
 	 */
 	public double[][][] get_sensor_datas() {
 		double[][][] sensor_datas= new double[sensor_num][SettingValues.ANALYSIS_DATA_AXIS_NUM][SettingValues.ANALYSIS_SENSOR_DATA_NUM * SettingValues.ANALYSIS_SENSOR_DATA_MUL_NUM];
-		
+
 		for(int i = 0;i<sensor_num;i++){
 			sensor_datas[i][0] = get_eurx_array(i);
 			sensor_datas[i][1] = get_eury_array(i);
 			sensor_datas[i][2] = get_eurz_array(i);
-			
+
 		}
-		
-		//Šî€‚Æ‚È‚éƒZƒ“ƒT”Ô†‚Æ•”ˆÊ‚É‚æ‚é•ªÍƒf[ƒ^‚ÌØ‚èo‚µ
-		
-		
+
+		//ï¿½î€ï¿½Æ‚È‚ï¿½Zï¿½ï¿½ï¿½Tï¿½Ôï¿½ï¿½Æ•ï¿½ï¿½Ê‚É‚ï¿½é•ªï¿½Íƒfï¿½[ï¿½^ï¿½ÌØ‚ï¿½oï¿½ï¿½
+
+
 		return sensor_datas;
 	}
-	
+
 	/**
-	 * x²ƒIƒCƒ‰[Šp‚Ìƒf[ƒ^”z—ñ‚ğæ“¾
+	 * xï¿½ï¿½ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Ìƒfï¿½[ï¿½^ï¿½zï¿½ï¿½ï¿½ï¿½æ“¾
 	 * @param per_data
 	 * @return
 	 */
 	private double[] get_eurx_array(int sensor_id){
 		Debug.debug_print("CreateSensorParameterAnalysis.get_eurz_array(SensorPersonalData per_data)",1);
 
-		// ü”g”•ªÍ‚ğs‚¤y²‰Á‘¬“xƒf[ƒ^”z—ñ
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½fï¿½[ï¿½^ï¿½zï¿½ï¿½
 		double[] data = new double[SettingValues.ANALYSIS_SENSOR_DATA_NUM * SettingValues.ANALYSIS_SENSOR_DATA_MUL_NUM];
-		// Œn—ñ”gŒ`‚ÌŒ‹‡‚Éƒf[ƒ^•âŠ®‚·‚éˆ×‚É•Û‚·‚éA
+		// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éƒfï¿½[ï¿½^ï¿½âŠ®ï¿½ï¿½ï¿½ï¿½×‚É•Ûï¿½ï¿½ï¿½ï¿½ï¿½A
 		double pre_time_data = 0.0;
 
-		// ÅV’ÊMƒiƒ“ƒo[‚ğæ“¾
+		// ï¿½ÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½æ“¾
 		int late_commu_num_index = normalized_data_commu_num[sensor_id];
-		// ÅV’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚Ì”‚ğæ“¾
+		// ï¿½ÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ìï¿½ï¿½ï¿½ï¿½æ“¾
 		int late_commu_data_num_index = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 				.getMax_index() - 1;
 
-		// ü”g”•ªÍ‚ğs‚¤‰^“®ƒf[ƒ^iy²‰Á‘¬“xj”z—ñ‚É’l‚ğŠi”[
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½jï¿½zï¿½ï¿½É’lï¿½ï¿½ï¿½iï¿½[
 		for (int i = 0; i < SettingValues.ANALYSIS_SENSOR_DATA_NUM;) {
-			// ’l‚ğŠi”[
+			// ï¿½lï¿½ï¿½ï¿½iï¿½[
 			data[i] = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 					.getEulx()[late_commu_data_num_index--];
-			//’l‚ğŠi”[‚µ‚½‚Ì‚ÅƒCƒ“ƒNƒŠƒƒ“ƒg
+			//ï¿½lï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
 			i++;
-			
-			// ’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚ğ‚·‚×‚ÄŠi”[‚µ‚½‚çA‚P‚Â‘O‚Ì’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚ğæ“¾
+
+			// ï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½×‚ÄŠiï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Pï¿½Â‘Oï¿½Ì’ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 			if (late_commu_data_num_index == 0) {
-				//‘O‰ñ‚ÌŠÔƒf[ƒ^‚ğæ“¾
+				//ï¿½Oï¿½ï¿½Ìï¿½ï¿½Ôƒfï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 				pre_time_data = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getTime()[late_commu_data_num_index];
 				if(late_commu_num_index==0)
@@ -193,57 +189,57 @@ public class MultiSensorPersonalData extends PersonalData{
 					late_commu_num_index--;
 				late_commu_data_num_index = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getMax_index() - 1;
-				// Œn—ñ”gŒ`‚ÌŠÔ‚ÌŠÔ·‚ğæ“¾
+				// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŠÔ‚Ìï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½æ“¾
 				double diff_time=pre_time_data-multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getTime()[late_commu_data_num_index];
-				
+
 				int last_index=i-1;
 				double last_data = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getEulx()[late_commu_data_num_index];
-				// Œn—ñ”gŒ`‚ÌŠÔ‚ğ•âŠÔ
+				// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŠÔ‚ï¿½ï¿½ï¿½
 				for(int j=0;j<diff_time;j++){
 					if(i < SettingValues.ANALYSIS_SENSOR_DATA_NUM)break;
 					data[i] = data[last_index] - (data[last_index]-last_data) * (double)((double)(j+1)/diff_time);
-					//’l‚ğŠi”[‚µ‚½‚Ì‚ÅƒCƒ“ƒNƒŠƒƒ“ƒg
+					//ï¿½lï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
 					i++;
 				}
 			}
 		}
-	
+
 		return(data);
 	}
 
-	
+
 	/**
-	 * y²ƒIƒCƒ‰[Šp‚Ìƒf[ƒ^”z—ñ‚ğæ“¾
+	 * yï¿½ï¿½ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Ìƒfï¿½[ï¿½^ï¿½zï¿½ï¿½ï¿½ï¿½æ“¾
 	 * @param per_data
 	 * @return
 	 */
 	private double[] get_eury_array(int sensor_id){
 		Debug.debug_print("CreateSensorParameterAnalysis.get_eurz_array(SensorPersonalData per_data)",1);
 
-		// ü”g”•ªÍ‚ğs‚¤y²‰Á‘¬“xƒf[ƒ^”z—ñ
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½fï¿½[ï¿½^ï¿½zï¿½ï¿½
 		double[] data = new double[SettingValues.ANALYSIS_SENSOR_DATA_NUM * SettingValues.ANALYSIS_SENSOR_DATA_MUL_NUM];
-		// Œn—ñ”gŒ`‚ÌŒ‹‡‚Éƒf[ƒ^•âŠ®‚·‚éˆ×‚É•Û‚·‚éA
+		// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éƒfï¿½[ï¿½^ï¿½âŠ®ï¿½ï¿½ï¿½ï¿½×‚É•Ûï¿½ï¿½ï¿½ï¿½ï¿½A
 		double pre_time_data = 0.0;
 
-		// ÅV’ÊMƒiƒ“ƒo[‚ğæ“¾
+		// ï¿½ÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½æ“¾
 		int late_commu_num_index = normalized_data_commu_num[sensor_id];
-		// ÅV’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚Ì”‚ğæ“¾
+		// ï¿½ÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ìï¿½ï¿½ï¿½ï¿½æ“¾
 		int late_commu_data_num_index = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 				.getMax_index() - 1;
 
-		// ü”g”•ªÍ‚ğs‚¤‰^“®ƒf[ƒ^iy²‰Á‘¬“xj”z—ñ‚É’l‚ğŠi”[
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½jï¿½zï¿½ï¿½É’lï¿½ï¿½ï¿½iï¿½[
 		for (int i = 0; i < SettingValues.ANALYSIS_SENSOR_DATA_NUM;) {
-			// ’l‚ğŠi”[
+			// ï¿½lï¿½ï¿½ï¿½iï¿½[
 			data[i] = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 					.getEuly()[late_commu_data_num_index--];
-			//’l‚ğŠi”[‚µ‚½‚Ì‚ÅƒCƒ“ƒNƒŠƒƒ“ƒg
+			//ï¿½lï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
 			i++;
-			
-			// ’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚ğ‚·‚×‚ÄŠi”[‚µ‚½‚çA‚P‚Â‘O‚Ì’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚ğæ“¾
+
+			// ï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½×‚ÄŠiï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Pï¿½Â‘Oï¿½Ì’ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 			if (late_commu_data_num_index == 0) {
-				//‘O‰ñ‚ÌŠÔƒf[ƒ^‚ğæ“¾
+				//ï¿½Oï¿½ï¿½Ìï¿½ï¿½Ôƒfï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 				pre_time_data = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getTime()[late_commu_data_num_index];
 				if(late_commu_num_index==0)
@@ -252,60 +248,60 @@ public class MultiSensorPersonalData extends PersonalData{
 					late_commu_num_index--;
 				late_commu_data_num_index = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getMax_index() - 1;
-				// Œn—ñ”gŒ`‚ÌŠÔ‚ÌŠÔ·‚ğæ“¾
+				// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŠÔ‚Ìï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½æ“¾
 				double diff_time=pre_time_data-multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getTime()[late_commu_data_num_index];
-				
+
 				int last_index=i-1;
 				double last_data = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getEuly()[late_commu_data_num_index];
-				// Œn—ñ”gŒ`‚ÌŠÔ‚ğ•âŠÔ
+				// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŠÔ‚ï¿½ï¿½ï¿½
 				for(int j=0;j<diff_time;j++){
 					if(i < SettingValues.ANALYSIS_SENSOR_DATA_NUM)break;
 					data[i] = data[last_index] - (data[last_index]-last_data) * (double)((double)(j+1)/diff_time);
-					//’l‚ğŠi”[‚µ‚½‚Ì‚ÅƒCƒ“ƒNƒŠƒƒ“ƒg
+					//ï¿½lï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
 					i++;
 				}
 			}
 		}
-	
+
 		return(data);
 	}
-	
+
 
 	private int eulz_correct_num = 0;
-	
+
 	/**
-	 * z²ƒIƒCƒ‰[Šp‚Ìƒf[ƒ^”z—ñ‚ğæ“¾
+	 * zï¿½ï¿½ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Ìƒfï¿½[ï¿½^ï¿½zï¿½ï¿½ï¿½ï¿½æ“¾
 	 * @param per_data
 	 * @return
 	 */
 	private double[] get_eurz_array(int sensor_id){
 		Debug.debug_print("CreateSensorParameterAnalysis.get_eurz_array(SensorPersonalData per_data)",1);
-		// ü”g”•ªÍ‚ğs‚¤y²‰Á‘¬“xƒf[ƒ^”z—ñ
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½fï¿½[ï¿½^ï¿½zï¿½ï¿½
 
-		// ü”g”•ªÍ‚ğs‚¤y²‰Á‘¬“xƒf[ƒ^”z—ñ
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½fï¿½[ï¿½^ï¿½zï¿½ï¿½
 		double[] data = new double[SettingValues.ANALYSIS_SENSOR_DATA_NUM * SettingValues.ANALYSIS_SENSOR_DATA_MUL_NUM];
-		// Œn—ñ”gŒ`‚ÌŒ‹‡‚Éƒf[ƒ^•âŠ®‚·‚éˆ×‚É•Û‚·‚éA
+		// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éƒfï¿½[ï¿½^ï¿½âŠ®ï¿½ï¿½ï¿½ï¿½×‚É•Ûï¿½ï¿½ï¿½ï¿½ï¿½A
 		double pre_time_data = 0.0;
 
-		// ÅV’ÊMƒiƒ“ƒo[‚ğæ“¾
+		// ï¿½ÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½ï¿½ï¿½æ“¾
 		int late_commu_num_index = normalized_data_commu_num[sensor_id];
-		// ÅV’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚Ì”‚ğæ“¾
+		// ï¿½ÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ìï¿½ï¿½ï¿½ï¿½æ“¾
 		int late_commu_data_num_index = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 				.getMax_index() - 1;
 
-		// ü”g”•ªÍ‚ğs‚¤‰^“®ƒf[ƒ^iy²‰Á‘¬“xj”z—ñ‚É’l‚ğŠi”[
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½jï¿½zï¿½ï¿½É’lï¿½ï¿½ï¿½iï¿½[
 		for (int i = 0; i < SettingValues.ANALYSIS_SENSOR_DATA_NUM;) {
-			// ’l‚ğŠi”[
+			// ï¿½lï¿½ï¿½ï¿½iï¿½[
 			data[i] = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 					.getEulz()[late_commu_data_num_index--]+360*eulz_correct_num;
-			//’l‚ğŠi”[‚µ‚½‚Ì‚ÅƒCƒ“ƒNƒŠƒƒ“ƒg
+			//ï¿½lï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
 			i++;
 
-			// ’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚ğ‚·‚×‚ÄŠi”[‚µ‚½‚çA‚P‚Â‘O‚Ì’ÊMƒiƒ“ƒo[‚Ì‰^“®ƒf[ƒ^‚ğæ“¾
+			// ï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½×‚ÄŠiï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Pï¿½Â‘Oï¿½Ì’ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ì‰^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 			if (late_commu_data_num_index == 0) {
-				//‘O‰ñ‚ÌŠÔƒf[ƒ^‚ğæ“¾
+				//ï¿½Oï¿½ï¿½Ìï¿½ï¿½Ôƒfï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 				pre_time_data = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getTime()[late_commu_data_num_index];
 				if(late_commu_num_index==0)
@@ -314,21 +310,21 @@ public class MultiSensorPersonalData extends PersonalData{
 					late_commu_num_index--;
 				late_commu_data_num_index = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getMax_index() - 1;
-				// Œn—ñ”gŒ`‚ÌŠÔ‚ÌŠÔ·‚ğæ“¾
+				// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŠÔ‚Ìï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½æ“¾
 				double diff_time=pre_time_data-multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getTime()[late_commu_data_num_index];
-				
+
 				int last_index=i-1;
 				double last_data = multi_act_data_normalized_array[sensor_id][late_commu_num_index]
 						.getEulz()[late_commu_data_num_index]+360*eulz_correct_num;
 				last_data=correct_eulz(data[last_index],last_data);
-				
-				// Œn—ñ”gŒ`‚ÌŠÔ‚ğ•âŠÔ
+
+				// ï¿½ï¿½ï¿½nï¿½ï¿½gï¿½`ï¿½ÌŠÔ‚ï¿½ï¿½ï¿½
 				for(int j=0;j<diff_time;j++){
 
 					if(i < SettingValues.ANALYSIS_SENSOR_DATA_NUM)break;
 					data[i] = data[last_index] - (data[last_index]-last_data) * (double)((double)(j+1)/diff_time);
-					//’l‚ğŠi”[‚µ‚½‚Ì‚ÅƒCƒ“ƒNƒŠƒƒ“ƒg
+					//ï¿½lï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
 					i++;
 				}
 			}
@@ -337,9 +333,9 @@ public class MultiSensorPersonalData extends PersonalData{
 //		eulz_correct_num=0;
 		return(data);
 	}
-	
+
 	/**
-	 * ƒIƒCƒ‰[Šp‚Ì180~-180‚Ì’µ‚Ñ‚ğC³
+	 * ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½ï¿½180~-180ï¿½Ì’ï¿½ï¿½Ñ‚ï¿½ï¿½Cï¿½ï¿½
 	 * @param pre_eurz
 	 * @param now_eurz
 	 * @return
@@ -355,28 +351,28 @@ public class MultiSensorPersonalData extends PersonalData{
 		}
 		return now_eurz;
 	}
-	
+
 	/**
-	 * ÅV‚Ì’ÊMƒiƒ“ƒo[‚ÌŠÔ³‹K‰»‰^“®ƒf[ƒ^‚©‚ç‘O‚É˜A‘±‚µ‚½•ªÍ‰Â”\ƒf[ƒ^”‚ğƒJƒEƒ“ƒg‚µA•ªÍ‰Â”\‚©‚Ç‚¤‚©‚ğ•Ô‹p
-	 * 
+	 * ï¿½ÅVï¿½Ì’ÊMï¿½iï¿½ï¿½ï¿½oï¿½[ï¿½Ìï¿½ï¿½Ôï¿½ï¿½Kï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½Oï¿½É˜Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‰Â”\ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Í‰Â”\ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½Ô‹p
+	 *
 	 * @param per_data
 	 * @return
 	 */
 	public boolean count_normalized_data_num() {
 		Debug.debug_print("CreateSensorParameterAnalysis.count_normalized_data_num(PersonalData per_data)",1);
 		int data_num = 0;
-		
-		
-		Debug.debug_print("ÅV’ÊMƒiƒ“ƒo["+normalized_data_commu_num,2);
+
+
+		Debug.debug_print("ï¿½ÅVï¿½ÊMï¿½iï¿½ï¿½ï¿½oï¿½["+normalized_data_commu_num,2);
 		boolean[] enough_data_flgs=new  boolean[sensor_num];
-		
+
 		for(int isensor = 0;isensor<sensor_num;isensor++){
 			int data_commu_num=normalized_data_commu_num[isensor];
 			for (int i = data_commu_num; i >= 0; i--) {
-				// ˜A‘±‚µ‚½•ªÍ‰Â”\‚Èƒf[ƒ^‚ª‚È‚¢ê‡A•ªÍ‚ğs‚í‚¸‚ÉI—¹
+				// ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‰Â”\ï¿½Èƒfï¿½[ï¿½^ï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Aï¿½ï¿½ï¿½Í‚ï¿½ï¿½sï¿½í‚¸ï¿½ÉIï¿½ï¿½
 				if (multi_act_data_normalized_array[isensor][i] == null)
 					return false;
-				
+
 				data_num += multi_act_data_normalized_array[isensor][i].getMax_index();
 				if(data_num > SettingValues.ANALYSIS_SENSOR_DATA_NUM){
 					enough_data_flgs[isensor]=true;
@@ -384,13 +380,13 @@ public class MultiSensorPersonalData extends PersonalData{
 				}
 			}
 		}
-		
+
 		for (int isensor = 0;isensor<sensor_num;isensor++){
 			if(!enough_data_flgs[isensor])
 				return false;
 		}
 		return true;
 	}
-	
-	
+
+
 }

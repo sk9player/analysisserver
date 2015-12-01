@@ -1,5 +1,8 @@
 package coach.sensor;
 
+import javaFXGUI.SampleController;
+
+import javafx.application.Platform;
 import setting.SettingValues;
 import sub.OutPutText;
 import coach.calc.CalcCompareScore;
@@ -25,6 +28,9 @@ public class StraightSkatingCompareCoach implements SensorCoach{
 		int ret_num = CalcCompareScore.count_coatch_id(data,calc_num,SettingValues.COACH_FREQ);
 		if(ret_num!=0)
 			ret_num = CalcCompareScore.count_same_coatch_id(data,ret_num,SettingValues.SAME_COATCHING_ID_COUNT);
+
+		if(SettingValues.USE_GUI)
+			Platform.runLater(new SampleController());
 
 		OutPutText.output_txt(data.name+"_paramater", data.act_para.toString()+calc_num+"\t"+ret_num+"\n", 0,true);
 		return ret_num;
